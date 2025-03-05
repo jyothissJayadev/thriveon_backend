@@ -19,7 +19,7 @@ export const createSpeed = async (req, res, next) => {
       // Get the date for the next day
       const currentDay = new Date(currentDate);
       currentDay.setDate(currentDate.getDate() + i);
-      const formattedDay = currentDay.toISOString().split("T")[0]; // Format as 'YYYY-MM-DD'
+      const formattedDay = currentDay.toLocaleDateString("en-CA"); // Get local date in 'YYYY-MM-DD' format
 
       // Check if a Speed document already exists with the same userId and current day
       const existingSpeed = await Speed.findOne({ userId, day: formattedDay });
@@ -240,7 +240,7 @@ export const updateSpeedTasks = async (req, res, next) => {
     }
 
     // Find the Speed document that matches the userId and day
-    const currentDay = new Date().toISOString().split("T")[0]; // Get current day in 'YYYY-MM-DD' format
+    const currentDay = new Date().toLocaleDateString("en-CA"); // Get local date in 'YYYY-MM-DD' format
 
     // Find the Speed document for the current day and user
     const speedDoc = await Speed.findOne({ userId, day: currentDay });
@@ -299,7 +299,7 @@ export const updateCompleteSpeed = async (req, res, next) => {
     }
 
     // Get the current day in 'YYYY-MM-DD' format
-    const currentDay = new Date().toISOString().split("T")[0];
+    const currentDay = new Date().toLocaleDateString("en-CA"); // Get local date in 'YYYY-MM-DD' format
 
     // Find the Speed document for the current day and user
     const speedDoc = await Speed.findOne({ userId, day: currentDay });
@@ -343,7 +343,7 @@ export const updateToRemoveCompleteSpeed = async (req, res, next) => {
     }
 
     // Get the current day in 'YYYY-MM-DD' format
-    const currentDay = new Date().toISOString().split("T")[0];
+    const currentDay = new Date().toLocaleDateString("en-CA"); // Get local date in 'YYYY-MM-DD' format
 
     // Find the Speed document for the current day and user
     const speedDoc = await Speed.findOne({ userId, day: currentDay });
